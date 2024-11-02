@@ -1,0 +1,37 @@
+.billboard {
+    position: relative;
+    max-width: 1800px;
+    max-height: 595px;
+}
+
+.billboard-img {
+    width: 100%; /* Ширина в 100% от родительского элемента */
+    height: auto; /* Автоматическая высота для сохранения пропорций */
+    border-radius: 20px;
+}
+
+.greeting{
+    position: absolute;
+    z-index: 1;
+    bottom: 0;
+    left: 0;
+    padding: 5rem;
+    color: #fff;
+
+}
+
+.greeting h1{
+    font-family: Inter, sans-serif;
+    font-weight: 900;
+    font-size: 3vw;
+    line-height: 60px;
+    letter-spacing: -2px;
+    margin: 0;
+}
+.greeting p{
+    font-family: Inter, sans-serif;
+    font-weight: 400;
+    font-size: 1vw;
+    line-height: 24px;
+    margin: 0;
+}
