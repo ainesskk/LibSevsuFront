@@ -23,31 +23,34 @@
 }
 
 .main-container{
-  max-width: 1900px;
+  max-width: 100%;
   margin-left: auto;
   margin-right: auto;
   justify-items: center;
 }
 
 .nav-container {
-  margin-bottom: 20px;
-  border-bottom-width: 2px;
+  margin-bottom: 1.5vw;
+  border-bottom-width: 0.15vw;
   border-bottom-color: #E5E8EB;
   border-bottom-style: solid;
 }
-
-.sevsu-logo{
-  max-height: 3rem;
-}
 .sevsu-head{
-  padding-left: 0.7vw;
+  margin: 1.7vw 0 0.5vw 3vw;
   display: flex;
   justify-content: flex-start;
   align-items: center;
   max-width: 100%;
+  color: #0D141C;
 }
+
+.sevsu-logo{
+  max-height: 2.8vw;
+}
+
 .university-name{
-  padding-left: 0.875rem;
-  font-size: 1.5vw;
+  padding-left: 1.2vw;
+  font-size: 1.6vw;
   font-weight: 800;
+  margin: 0;
 }

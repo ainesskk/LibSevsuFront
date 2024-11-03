@@ -1,13 +1,14 @@
 .billboard {
     position: relative;
-    max-width: 1800px;
-    max-height: 595px;
+    margin: 0 auto;
+    width: 90%;
 }
 
 .billboard-img {
-    width: 100%; /* Ширина в 100% от родительского элемента */
-    height: auto; /* Автоматическая высота для сохранения пропорций */
+    width: 100%;
+    object-fit: cover;
     border-radius: 20px;
+    filter: brightness(80%);
 }
 
 .greeting{
@@ -15,23 +16,39 @@
     z-index: 1;
     bottom: 0;
     left: 0;
-    padding: 5rem;
+    padding-bottom: 5vw;
+    padding-left: 3.5vw;
     color: #fff;
-
 }
 
 .greeting h1{
     font-family: Inter, sans-serif;
     font-weight: 900;
-    font-size: 3vw;
-    line-height: 60px;
-    letter-spacing: -2px;
-    margin: 0;
+    font-size: 3.5vw;
+    letter-spacing: -0.05vw;
+    margin: 0 0 0.8vw 0;
 }
 .greeting p{
     font-family: Inter, sans-serif;
     font-weight: 400;
-    font-size: 1vw;
-    line-height: 24px;
+    font-size: 1.2vw;
     margin: 0;
+}
+
+@media screen and (max-width: 1024px) {
+    .greeting h1{
+        font-size: 4vw;
+    }
+    .greeting p{
+        font-size: 2vw;
+    }
+}
+
+@media screen and (max-width: 660px){
+    .greeting h1{
+        font-size: 5vw;
+    }
+    .greeting p{
+        font-size: 2.5vw;
+    }
 }
