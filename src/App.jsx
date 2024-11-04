@@ -18,6 +18,7 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/authentication" element={<Authentication />} />
           </Routes>
+          <div></div>
       </>
   )
 }
