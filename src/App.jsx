@@ -1,7 +1,8 @@
 import './App.css'
 import Navigation from "./Navigation.jsx";
-import Billboard from "./Billboard.jsx";
-import Services from "./Services.jsx";
+import {Routes, Route} from "react-router-dom";
+import Authentication from "./Authentication.jsx";
+import Home from "./Home.jsx";
 // 1912 922
 function App() {
   return (
@@ -13,13 +14,10 @@ function App() {
               </div>
               <Navigation/>
           </div>
-
-          <div className="main-container">
-              <Billboard />
-          </div>
-          <Services />
-
-
+          <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/authentication" element={<Authentication />} />
+          </Routes>
       </>
   )
 }

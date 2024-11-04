@@ -54,6 +54,7 @@
 
 @media screen and (max-width: 1024px) {
     .pin-container {
+        border-radius: 1.1vw;
         margin: 0.4vw;
         width: 4vw;
         height: 4vw;
@@ -80,6 +81,7 @@
     }
 
     .pin-container {
+        border-radius: 1.5vw;
         margin: 1vw;
         width: 5vw;
         height: 5vw;
@@ -108,7 +110,7 @@
         border-bottom-right-radius: 1vw;
         border-top-right-radius: 1vw;
         box-shadow: 0 0 4px 4px rgba(0, 0, 0, 0.3);
-        transition: transform 1s ease-in-out;
+        transition: transform 0.1s linear;
         z-index: 3;
     }
 
@@ -133,6 +135,7 @@
 
 @media screen and (max-width: 550px) {
     .pin-container {
+        border-radius: 2vw;
         margin: 1vw;
         width: 7vw;
         height: 7vw;
