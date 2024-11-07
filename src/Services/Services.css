@@ -7,7 +7,7 @@
 }
 
 .services-container h2 {
-    font-size: 3.5vh;
+    font-size: 3.2vw;
     font-weight: 700;
     margin: 0 0 1.8vw 0.8vw;
 }
@@ -22,7 +22,7 @@
 .services-item-container h3 {
     color: #0D141C;
     margin: 0;
-    font-size: 2.5vh;
+    font-size: 2vw;
     font-weight: 600;
 }
 
@@ -85,8 +85,8 @@
         flex: 1 1 calc(100% - 1rem);
     }
     .services-container h2 {
-        font-size: 6vw;
-        margin: 4vw 0 4vw 0;
+        font-size: 7vw;
+        margin: 5vw 0 5vw 0;
     }
     .services-item-container h3 {
         font-size: 5vw;

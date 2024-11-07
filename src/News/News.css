@@ -1,0 +1,84 @@
+.news-preface-container{
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5vw;
+    padding: 3vw 0 3vw 0;
+    border-radius: 25px;
+    justify-items: center;
+    text-align: center;
+    background-color: #EEEEEE;
+    box-shadow: 0 4px 4px 0 #1A80E5;
+
+}
+
+.news-preface-container h2 {
+    color: #0D141C;
+    font-size: 3vw;
+    font-weight: 700;
+    margin: 0;
+}
+
+.news-preface-container p {
+    color: #0D141C;
+    font-size: 1.2vw;
+    font-weight: 400;
+    margin: 0 0 1.5vw 0;
+}
+
+.news-preface-container button {
+    background-color: #1A80E5;
+    color: #fff;
+    font-family: Inter, sans-serif;
+    font-size: 1.7vw;
+    font-weight: 700;
+    padding: 1vw 3.5vw 1vw 3.5vw;
+    border-radius: 10px;
+    border: none;
+}
+
+.news-container{
+    margin-top: 5vw;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.news-container h2 {
+    font-size: 3.2vw;
+    font-weight: 700;
+    margin: 0 0 1.8vw 0.8vw;
+    color: #0D141C;
+}
+
+@media screen and (max-width: 1024px) {
+    .news-preface-container p {
+        font-size: 1.6vw;
+    }
+}
+
+@media screen and (max-width: 660px) {
+    .news-preface-container{
+        padding: 7vw 0 5vw 0;
+
+    }
+    .news-preface-container h2{
+        font-size: 5vw;
+        margin-bottom: 2vw;
+    }
+    .news-preface-container p {
+        font-size: 3.3vw;
+        margin-bottom: 4vw;
+    }
+    .news-preface-container button {
+        font-size: 3.7vw;
+        font-weight: 700;
+        padding: 1.2vw 7.5vw 1.2vw 7.5vw;
+        border-radius: 10px;
+    }
+    .news-container h2{
+
+        font-size: 7vw;
+        margin: 8vw 0 4vw 0;
+    }
+}
