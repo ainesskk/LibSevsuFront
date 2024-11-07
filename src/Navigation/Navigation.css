@@ -47,7 +47,7 @@
 }
 
 .pin-container img {
-    width: calc(2.9vw - 15px);
+    width: calc(2.9vw - 1vw);
     object-fit: cover;
 }
 
@@ -59,7 +59,7 @@
         height: 4vw;
     }
     .pin-container img {
-        width: calc(2.9vw - 5px);
+        width: calc(2.9vw - 0.5vw);
     }
     .nav-item-pins-container {
         width: 15vw;
@@ -87,7 +87,7 @@
     }
 
     .pin-container img {
-        width: calc(2.9vw - 1px);
+        width: calc(2.9vw - 0.5vw);
     }
 
     .nav-item-pins-container {

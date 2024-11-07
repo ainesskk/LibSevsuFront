@@ -24,6 +24,7 @@
 
 .burger-menu .item {
     padding: 10px;
+    color: #0D141C;
 }
 
 .burger-menu .item:nth-child(1) {
