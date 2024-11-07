@@ -1,6 +1,6 @@
 import axios from "axios";
 import {useState} from "react";
-import {baseUrl} from "./data.js";
+import {baseUrl} from "../data.js";
 
 
 export default function Login() {
@@ -18,9 +18,10 @@ export default function Login() {
             login: data.login,
             password: data.password
         };
+       
         axios.post(`${baseUrl}/Account/auth-token`, userData)
             .then((response) => {
-                console.log(response.status, response.data.message);
+                console.log(response);
             })
             .catch((error) => {
                 console.error("Error:", error);

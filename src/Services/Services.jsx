@@ -1,6 +1,6 @@
 import ServicesItem from './ServicesItem.jsx'
-import {services} from './data.js'
-import {servicesImages} from './data.js'
+import {services} from '../data.js'
+import {servicesImages} from '../data.js'
 import './Services.css'
 
 export default function Services() {

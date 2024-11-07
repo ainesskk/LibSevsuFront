@@ -1,6 +1,6 @@
 import axios from "axios";
 import {useState} from "react";
-import {baseUrl} from "./data.js";
+import {baseUrl} from "../data.js";
 
 
 export default function Registration() {
