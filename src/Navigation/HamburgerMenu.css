@@ -39,6 +39,7 @@
     list-style-type: none;
     position: relative;
     display: flex;
+    color: #000000;
 
     align-items: center;
     justify-content: space-between;

@@ -1,10 +1,12 @@
 .navbar{
     list-style-type: none;
+    padding: 0;
+    width: 90%;
+    margin: 0 auto;
     display: flex;
     position: relative;
     align-items: center;
     height: 4vw;
-    margin: 0 6vw 0.3vw 2.9vw;
 }
 
 .navbar .navbar-volatile{
@@ -64,9 +66,11 @@
     .nav-item-pins-container {
         width: 15vw;
     }
+
     .navbar{
-        margin: 0 6vw 1vw 2.9vw;
+        margin-bottom: 1vw;
     }
+
     .nav-item{
         font-size: 1.7vw;
         font-weight: 500;

@@ -15,12 +15,16 @@ export default function HamburgerMenu() {
         }
     });
 
+    let authentication = "/authentication";
+    let search = "/search";
+
+
     return (
         <>
             <ul className={`burger-menu ${isOpen ? "active" : ""}`} ref={menuRef}>
                 <li className="item"><Link to="/" onClick={() => setOpen(false)}>Главная</Link></li>
-                   <li className="item"><Link to="/authentication" onClick={() => setOpen(false)}>Аккаунт</Link></li>
-                <li className="item"><a>Поиск</a></li>
+                   <li className="item"><Link to={authentication} onClick={() => setOpen(false)}>Аккаунт</Link></li>
+                <li className="item"><Link to={search} onClick={() => setOpen(false)}>Поиск</Link></li>
                 <li className="item"><a>Избранное</a></li>
                 <li className="item">
                     <a href={irbisHref} target="_blank" onClick={() => setOpen(false)}>Электронный каталог</a>

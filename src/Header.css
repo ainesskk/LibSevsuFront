@@ -1,11 +1,13 @@
 .nav-container {
+
     margin-bottom: 1.5vw;
     border-bottom-width: 0.15vw;
     border-bottom-color: #E5E8EB;
     border-bottom-style: solid;
 }
 .sevsu-head{
-    margin: 1.7vw 0 1vw 3vw;
+    width: 90%;
+    margin: 1.7vw auto 1vw auto;
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -15,7 +17,6 @@
 
 .sevsu-logo{
     max-height: 2.5vw;
-    padding-left: 40px;
 }
 
 .university-name{
@@ -25,6 +26,7 @@
     font-weight: 800;
     margin: 0;
 }
+
 
 @media screen and (max-width: 660px){
     .sevsu-head{
