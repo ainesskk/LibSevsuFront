@@ -4,6 +4,7 @@ import Authentication from "./Authentication/Authentication.jsx";
 import Home from "./Home.jsx";
 import Header from "./Header.jsx";
 import Search from "./BookSearch/Search.jsx";
+import UserPage from "./PersonalPage/UserPage.jsx";
 // 1912 922
 function App() {
 
@@ -14,6 +15,7 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="search" element={<Search />} />
               <Route path="authentication" element={<Authentication />} />
+              <Route path="/userpage" element={<UserPage />} />
           </Routes>
       </>
   )

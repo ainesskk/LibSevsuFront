@@ -1,18 +1,15 @@
-import {useState} from "react";
-import {loginRequest, } from "../api/authenticationRequests.jsx";
-import Registration from "./Registration.jsx";
-import UserPage from "../PersonalPage/UserPage.jsx";
-
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { loginRequest } from "../api/authenticationRequests.jsx";
 
 export default function Login() {
-
     const [data, setData] = useState({ login: "", password: "" });
-    const [login, setLogin] = useState(false);
-
+    const navigate = useNavigate();
 
     const handleChange = (event) => {
         setData({ ...data, [event.target.name]: event.target.value });
     };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -21,28 +18,20 @@ export default function Login() {
             password: data.password
         };
 
-        if( (await loginRequest(userData)) === 200){
-            setLogin(true);
+        const status = await loginRequest(userData);
+        console.log('Login Response Status:', status);
+        if (status === 200) {
+            navigate("/userpage");
         }
     };
 
-    function getLogin() {
-        if(login === true){
-            return <UserPage />
-        }
-    }
-
     return (
         <>
-            {/*пидорас*/}
             <form onSubmit={handleSubmit}>
-                <input name="login" type="login" placeholder="Логин" onChange={handleChange}/>
-                <input name="password" type="password" placeholder="Пароль" autoComplete="on" onChange={handleChange}/>
+                <input name="login" type="text" placeholder="Логин" onChange={handleChange} />
+                <input name="password" type="password" placeholder="Пароль" autoComplete="on" onChange={handleChange} />
                 <button className="login" type="submit">Войти</button>
             </form>
-            {
-                getLogin()
-            }
         </>
     )
 }
