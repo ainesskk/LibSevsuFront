@@ -35,8 +35,6 @@ export default function AuthenticationTeg() {
             <button className="button-login" onClick={() => {
                 setStatusAuthent("Login");
             }}>Вход</button>
-            {/*<AddNews />*/}
-            {/*<DeleteNews />*/}
         </>
     )
 }

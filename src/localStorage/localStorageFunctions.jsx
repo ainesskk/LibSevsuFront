@@ -17,8 +17,14 @@ export function getToken() {
     return localStorage.getItem('token');
 }
 
-export function getPhoto(){
-    return localStorage.getItem('photoId');
+//функция получения роли пользователя из localstorage
+export function getRole(){
+    const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+    if (userInfo && userInfo.role) {
+        return userInfo.role;
+    } else {
+        return null;
+    }
 }
 
 //функция получения id изображения пользователя из localstorage

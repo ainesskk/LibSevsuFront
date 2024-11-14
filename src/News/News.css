@@ -26,7 +26,7 @@
     margin: 0 0 1.5vw 0;
 }
 
-.news-preface-container button {
+.news-preface-container button, .more-button {
     background-color: #1A80E5;
     color: #fff;
     font-family: Inter, sans-serif;
@@ -74,7 +74,7 @@
     .news-preface-container button {
         font-size: 3.7vw;
         font-weight: 700;
-        padding: 1.2vw 7.5vw 1.2vw 7.5vw;
+        padding: 1.7vw 8vw 1.8vw 8vw;
         border-radius: 10px;
     }
     .news-container h2{

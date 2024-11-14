@@ -1,32 +1,33 @@
 import { useState, useEffect, useContext } from "react";
 import { postUserImageRequest } from "../api/authenticationRequests.jsx";
-import { getImageId, getToken, setData, useDeleteUserInfo } from "../localStorage/localStorageFunctions.jsx";
+import {getImageId, getRole, getToken, setData, useDeleteUserInfo} from "../localStorage/localStorageFunctions.jsx";
 import { baseUrl } from "../data.js";
 import './UserPage.css';
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../contexts/AppContext/AuthContext.jsx";
+import AddNews from "../Admin/AddNews.jsx"
 
 export default function UserPage() {
     const [photo, setPhoto] = useState(null);
-    const [imgURL, setImgURL] = useState(""); // Инициализируем пустым значением
+    const [imgURL, setImgURL] = useState("");
     const deleteUserInfo = useDeleteUserInfo();
     const { logout } = useContext(AuthContext);
     const navigate = useNavigate();
     const defaultImg = "../src/assets/unknownUser.png";
 
-    // Функция фиксации изменений в поле загрузки файла
+    // функция фиксации изменений в поле загрузки файла
     const handleChangeFile = (event) => {
         setPhoto(event.target.files[0]);
     };
 
-    // Функция выхода из аккаунта
+    // функция выхода из аккаунта
     const handleLogout = async () => {
         await deleteUserInfo();
         logout();
         navigate("/");
     };
 
-    // Загрузка изображения при монтировании
+    // загрузка данных при монтировании
     useEffect(() => {
         async function initializeData() {
             await setData(getToken());
@@ -48,7 +49,7 @@ export default function UserPage() {
         }
 
         initializeData();
-    }, []); // Убедитесь, что зависимости пустые
+    }, []);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -75,6 +76,14 @@ export default function UserPage() {
         }
     };
 
+    const returnAdminTools = () => {
+        if(getRole() === "Admin") {
+            return (
+                <AddNews />
+            )
+        }
+    }
+
     return (
         <>
             <form onSubmit={handleSubmit}>
@@ -82,6 +91,9 @@ export default function UserPage() {
                 <input type="file" name="photo" placeholder="Фото пользователя" onChange={handleChangeFile}/>
                 <button className="login" type="submit">Загрузить аватарку</button>
             </form>
+            {
+                returnAdminTools()
+            }
             <button className="logout" onClick={handleLogout}>Выйти</button>
         </>
     );

@@ -33,7 +33,7 @@ export default function Registration() {
     };
 
     return (
-        <>{/*пидорас*/}
+        <>
             <form onSubmit={handleSubmit}>
                 <input name="login" type="login" placeholder="Логин" onChange={handleChange}/>
                 <input name="password" type="password" placeholder="Пароль" autoComplete="on" onChange={handleChange}/>

@@ -1,4 +1,4 @@
-import Navigation from "./Navigation/Navigation.jsx";
+import Navigation from "./Menu/Navigation.jsx";
 import "./Header.css"
 
 export default function Header() {

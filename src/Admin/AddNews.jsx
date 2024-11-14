@@ -1,34 +1,45 @@
 import {useState} from "react";
-import axios from "axios";
-import {baseUrl} from "../data.js";
-
+import {postNewsImageRequest, postNewsRequest} from "../api/newsRequests.jsx";
 export default function AddNews() {
 
-    const [photo, setPhoto] = useState({ });
+    const [photo, setPhoto] = useState("");
+    const [news, setNews] = useState({ label: "", text: ""});
+
+    const handleChangeFile = (event) => {
+        setPhoto(event.target.files[0]);
+    };
 
     const handleChange = (event) => {
-        setPhoto(event.target.files[0]);
+        setNews({ ...news, [event.target.name]: event.target.value });
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        const newsData = {
+            label: news.label,
+            text: news.text,
+        };
+
+        console.log("newsData ", newsData);
+
+
         const formData = new FormData();
         formData.append('file', photo);
-        axios.post(`${baseUrl}/News/c1958607-5838-498b-eb6d-8a4d710aba4a/Image`,formData )
-            .then((response) => {
-                console.log(response);
-            })
-            .catch((error) => {
-                console.error("Error:", error);
-            });
+
+        const newsId = await postNewsRequest(newsData);
+        console.log(newsId);
+
+        await postNewsImageRequest(formData, newsId);
     };
 
     return (
         <>
             <form onSubmit={handleSubmit}>
-                <input type="file" name="photoNews" placeholder="Фото новости" onChange={handleChange}/>
-                <button type="submit">Gjlndthlbnm</button>
+                <input type="text" name="label" placeholder="Заголовок новости" onChange={handleChange}/>
+                <input type="text" name="text" placeholder="Текст новости" onChange={handleChange}/>
+                <input type="file" name="photo" placeholder="Фото новости" onChange={handleChangeFile}/>
+                <button type="submit">Опубликовать новость</button>
             </form>
         </>
     )

@@ -42,7 +42,7 @@ export default function HamburgerMenu() {
                     <h2 className="uni-name">Библиотека Севастопольского<br></br> государственного университета</h2>
                 </li>
                 <li onClick={() => setOpen(!isOpen)}><img className="menu-icon"
-                    src="/src/assets/account.svg" alt="menu"></img></li>
+                    src="/src/assets/menu.svg" alt="menu"></img></li>
             </ul>
         </>
     )

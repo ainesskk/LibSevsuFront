@@ -4,17 +4,6 @@ import {getImageId, getToken, setData} from "../localStorage/localStorageFunctio
 
 //Запрос на вход пользователя
 export async function loginRequest(userData) {
-    // axios.post(`${baseUrl}/Account/auth-token`, userData)
-    //     .then((response) => {
-    //         console.log(response);
-    //         setData(response.data);
-    //         return response.status;
-    //
-    //     })
-    //     .catch((error) => {
-    //         console.error("Error:", error);
-    //         return error.status;
-    //     });
     try {
         const response = await axios.post(`${baseUrl}/Account/auth-token`, userData);
         console.log(response);
