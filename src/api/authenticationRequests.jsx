@@ -29,7 +29,7 @@ export async function loginRequest(userData) {
     }
 }
 
-export async function registrationRequest(userData, formData) {
+export async function registrationRequest(userData) {
     try {
         const response = await axios.post(`${baseUrl}/Account`, userData);
         console.log(response);
@@ -38,29 +38,18 @@ export async function registrationRequest(userData, formData) {
                 login: userData.login,
                 password: userData.password
             };
-            await postUserImageRequest(formData);
             await loginRequest(loginData);
         }
+        return response.status;
     } catch (error) {
         console.error("Error:", error);
     }
 }
 
-export async function postUserImageRequest(formData) {
-    try {
-        const response = await axios.post(`${baseUrl}/User/Image`, formData, {
-            headers: { "Authorization": `Bearer ${getToken()}` }
-        });
-        console.log(response);
-    } catch (error) {
-        console.error("Error:", error);
-    }
-}
-
-export async function userInfoRequest(token) {
+export async function userInfoRequest() {
     try {
         const response = await axios.get(`${baseUrl}/User`, {
-            headers: { "Authorization": `Bearer ${token}` }
+            headers: { "Authorization": `Bearer ${getToken()}` }
         });
         return response.data;
     } catch (error) {
@@ -69,15 +58,25 @@ export async function userInfoRequest(token) {
     }
 }
 
+export async function postUserImageRequest(formData) {
+    try {
+        const response = await axios.post(`${baseUrl}/User/Image`, formData, {
+            headers: { "Authorization": `Bearer ${getToken()}` }
+        });
+        console.log("postUserImageRequest:", response);
+    } catch (error) {
+        console.error("Error postUserImageRequest:", error);
+    }
+}
+
 export async function userImageRequest() {
     try {
         const imageId = await getImageId();
-        console.log(imageId);
+        console.log("userImageRequest ", imageId);
         const response = await axios.get(`${baseUrl}/Image/${imageId}`, {
             headers: { "Authorization": `Bearer ${getToken()}` }
         });
-        console.log("userImageRequest "+response.data);
-        return response.data;
+        return response;
     }
     catch (error) {
         console.error("Error:", error);

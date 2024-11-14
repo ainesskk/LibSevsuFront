@@ -1,13 +1,22 @@
 import Registration from "./Registration.jsx";
 import Login from "./Login.jsx";
-import {useState} from "react";
-
-
+import {useContext, useEffect, useState} from "react";
+import {AuthContext} from "../contexts/AppContext/AuthContext.jsx";
+import {useNavigate} from "react-router-dom";
 
 export default function AuthenticationTeg() {
+    const {isAuthorized} = useContext(AuthContext);
     const [statusAuthent, setStatusAuthent] = useState("Registration");
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if(isAuthorized){
+            navigate('/userpage');
+        }
+    }, [navigate])
 
     function getAuthenticationTeg() {
+
         if(statusAuthent === "Registration"){
             return <Registration />
         }else{

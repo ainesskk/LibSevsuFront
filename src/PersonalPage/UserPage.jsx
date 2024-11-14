@@ -1,69 +1,88 @@
-import { useState, useEffect } from "react";
-import { postUserImageRequest, userImageRequest, userInfoRequest } from "../api/authenticationRequests.jsx";
-import { getImageIdLS, getPhoto, getToken } from "../localStorage/localStorageFunctions.jsx";
+import { useState, useEffect, useContext } from "react";
+import { postUserImageRequest } from "../api/authenticationRequests.jsx";
+import { getImageId, getToken, setData, useDeleteUserInfo } from "../localStorage/localStorageFunctions.jsx";
 import { baseUrl } from "../data.js";
+import './UserPage.css';
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../contexts/AppContext/AuthContext.jsx";
 
 export default function UserPage() {
-    const [photo, setPhoto] = useState();
-    const [img, setImg] = useState('..src/assets/unknownUser.png');
+    const [photo, setPhoto] = useState(null);
+    const [imgURL, setImgURL] = useState(""); // Инициализируем пустым значением
+    const deleteUserInfo = useDeleteUserInfo();
+    const { logout } = useContext(AuthContext);
+    const navigate = useNavigate();
+    const defaultImg = "../src/assets/unknownUser.png";
 
+    // Функция фиксации изменений в поле загрузки файла
     const handleChangeFile = (event) => {
         setPhoto(event.target.files[0]);
-        console.log("File selected:", event.target.files[0]);
-
     };
 
+    // Функция выхода из аккаунта
+    const handleLogout = async () => {
+        await deleteUserInfo();
+        logout();
+        navigate("/");
+    };
+
+    // Загрузка изображения при монтировании
+    useEffect(() => {
+        async function initializeData() {
+            await setData(getToken());
+            const imgId = await getImageId();
+            console.log(imgId);
+
+            if (imgId) {
+                try {
+                    const imageURL = `${baseUrl}/Image/${imgId}`;
+                    setImgURL(imageURL);
+                } catch (error) {
+                    console.error("Ошибка при загрузке изображения:", error);
+                    setImgURL(defaultImg);
+                }
+            } else {
+                setImgURL(defaultImg);
+                console.log("Установлено изображение по умолчанию");
+            }
+        }
+
+        initializeData();
+    }, []); // Убедитесь, что зависимости пустые
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log("Form submitted");
+        console.log("кнопка формы");
+
+        if (!photo) {
+            return;
+        }
 
         const formData = new FormData();
         formData.append('file', photo);
-        console.log("FormData created:", formData);
+        console.log("форма ", formData);
 
         try {
-            const response = await postUserImageRequest(formData);
-            console.log("Image upload response:", response);
+            await postUserImageRequest(formData);
+            await setData(getToken());
 
-            const imageUrl = await userImageRequest(getToken());
-            console.log("Fetched image URL:", imageUrl);
-
+            const imgId = await getImageId();
+            const imageURL = `${baseUrl}/Image/${imgId}`;
+            setImgURL(imageURL);
         } catch (error) {
-            console.error("Error during image upload:", error);
-        }
-
-        try {
-            const dataUser = await userInfoRequest(getToken());
-            console.log("User info:", dataUser);
-
-        } catch (error) {
-            console.error("Error fetching user info:", error);
+            console.error("Ошибка при загрузке изображения:", error);
+            setImgURL(defaultImg);
         }
     };
 
-
-
-    async function uploadPhoto() {
-        const data = await userInfoRequest(getToken());
-        await setImg(data.photoId);
-    }
-    uploadPhoto();
-    getPhoto();
     return (
         <>
             <form onSubmit={handleSubmit}>
-                {
-                    async () => {
-                        if(await userImageRequest(getToken()) === 404)
-                            return <img src={`${img}`} alt=""/>
-                        else
-                            return <img src={`${baseUrl}/Image/${img}`} alt=""/>
-                    }
-                }
-                <input type="file" name="photo" placeholder="Фото новости" onChange={handleChangeFile}/>
+                <img className="user-photo" src={imgURL || defaultImg} alt=""/>
+                <input type="file" name="photo" placeholder="Фото пользователя" onChange={handleChangeFile}/>
                 <button className="login" type="submit">Загрузить аватарку</button>
             </form>
+            <button className="logout" onClick={handleLogout}>Выйти</button>
         </>
     );
 }

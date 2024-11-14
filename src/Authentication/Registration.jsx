@@ -1,10 +1,12 @@
-import {useState} from "react";
+import {useContext, useState} from "react";
 import {registrationRequest} from "../api/authenticationRequests.jsx";
 import { useNavigate } from "react-router-dom";
+import {AuthContext} from "../contexts/AppContext/AuthContext.jsx";
 
 
 export default function Registration() {
     const navigate = useNavigate();
+    const {login} = useContext(AuthContext);
 
     const [data, setData] = useState({ login: "", password: "", name: "" });
 
@@ -23,7 +25,8 @@ export default function Registration() {
 
         const status = await registrationRequest(userData);
         console.log('Login Response Status:', status);
-        if (status === 200) {
+        if (status === 201) {
+            login();
             navigate("/userpage");
         }
 
