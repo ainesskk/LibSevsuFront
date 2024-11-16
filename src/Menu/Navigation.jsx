@@ -6,7 +6,7 @@ import StandardMenu from "./StandardMenu.jsx";
 export default function Navigation(){
 
     // проверка на установку выпадающего меню
-    const[miniSize, setMiniSize] = useState(true);
+    const[miniSize, setMiniSize] = useState(false);
 
     useEffect(() => {
         const handleResize = () => {
@@ -16,7 +16,6 @@ export default function Navigation(){
                 setMiniSize(false);
             }
         }
-
             handleResize();
 
             window.addEventListener("resize", handleResize);

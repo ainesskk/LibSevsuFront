@@ -1,11 +1,12 @@
-import "./News.css";
-import { useState, useEffect, useRef } from "react";
+import {useEffect, useRef, useState} from "react";
 import axios from "axios";
-import { baseUrl } from "../data.js";
-import Post from "./Post";
+import {baseUrl} from "../data.js";
+import Post from "./Post.jsx";
+import "./News.css"
 
-export default function News() {
-    const [pagin, setPagin] = useState({ take: 2, skip: 0 });
+export default function NewsList() {
+
+    const [pagin, setPagin] = useState({ take: 100, skip: 0 });
     const [news, setNews] = useState([]);
     const isFetching = useRef(false);
 
@@ -32,14 +33,11 @@ export default function News() {
 
     return (
         <>
-            <div className="news-container">
-                <h2>Новости и анонсы</h2>
-                <div className="post-container">
-                    {news.map(item => (
-                        <Post key={item.id} item={item} />
-                    ))}
-                </div>
+            <div className="all-news-container">
+                {news.map(item => (
+                    <Post key={item.id} item={item} />
+                ))}
             </div>
         </>
-    );
+    )
 }

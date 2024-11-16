@@ -6,12 +6,14 @@ import './UserPage.css';
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../contexts/AppContext/AuthContext.jsx";
 import AddNews from "../Admin/AddNews.jsx"
+import AddBooks from "../Admin/AddBooks.jsx";
 
 export default function UserPage() {
     const [photo, setPhoto] = useState(null);
     const [imgURL, setImgURL] = useState("");
     const deleteUserInfo = useDeleteUserInfo();
     const { logout } = useContext(AuthContext);
+    const { setDefaultPhoto, setPhotoChanged } = useContext(AuthContext);
     const navigate = useNavigate();
     const defaultImg = "../src/assets/unknownUser.png";
 
@@ -23,6 +25,7 @@ export default function UserPage() {
     // функция выхода из аккаунта
     const handleLogout = async () => {
         await deleteUserInfo();
+        setDefaultPhoto();
         logout();
         navigate("/");
     };
@@ -37,6 +40,7 @@ export default function UserPage() {
             if (imgId) {
                 try {
                     const imageURL = `${baseUrl}/Image/${imgId}`;
+                    setPhotoChanged(imgId);
                     setImgURL(imageURL);
                 } catch (error) {
                     console.error("Ошибка при загрузке изображения:", error);
@@ -69,6 +73,7 @@ export default function UserPage() {
 
             const imgId = await getImageId();
             const imageURL = `${baseUrl}/Image/${imgId}`;
+            setPhotoChanged(imgId);
             setImgURL(imageURL);
         } catch (error) {
             console.error("Ошибка при загрузке изображения:", error);
@@ -79,7 +84,10 @@ export default function UserPage() {
     const returnAdminTools = () => {
         if(getRole() === "Admin") {
             return (
-                <AddNews />
+                <>
+                    <AddNews />
+                    <AddBooks />
+                </>
             )
         }
     }

@@ -36,8 +36,8 @@ export default function AddNews() {
     return (
         <>
             <form onSubmit={handleSubmit}>
-                <input type="text" name="label" placeholder="Заголовок новости" onChange={handleChange}/>
-                <input type="text" name="text" placeholder="Текст новости" onChange={handleChange}/>
+                <textarea name="label" placeholder="Заголовок новости" rows={2} cols={40} onChange={handleChange}/>
+                <textarea name="text" placeholder="Текст новости" rows={4} cols={40} onChange={handleChange}/>
                 <input type="file" name="photo" placeholder="Фото новости" onChange={handleChangeFile}/>
                 <button type="submit">Опубликовать новость</button>
             </form>

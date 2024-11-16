@@ -1,41 +1,49 @@
 import {useState} from "react";
-import axios from "axios";
-import {baseUrl} from "../data.js";
+import {postBookImageRequest, postBookRequest} from "../api/booksRequests.jsx";
+export default function AddBooks() {
 
-export default function AddNews() {
-
-    const [photo, setPhoto] = useState({ });
-    const [data, setData] = useState({ label: "", text: ""});
+    const [photo, setPhoto] = useState("");
+    const [book, setBook] = useState({name: "", description: "", author: "", publishDate: "" });
 
     const handleChangeFile = (event) => {
         setPhoto(event.target.files[0]);
     };
 
     const handleChange = (event) => {
-        setData({ ...data, [event.target.name]: event.target.value });
+        setBook({ ...book, [event.target.name]: event.target.value });
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        const bookData = {
+            name: book.name,
+            description: book.description,
+            author: book.author,
+            publishDate: book.publishDate
+        };
+
+        console.log("bookData ", bookData);
+
+
         const formData = new FormData();
         formData.append('file', photo);
-        axios.post(`${baseUrl}/News/c1958607-5838-498b-eb6d-8a4d710aba4a/Image`,formData )
-            .then((response) => {
-                console.log(response);
-            })
-            .catch((error) => {
-                console.error("Error:", error);
-            });
+
+        const bookId = await postBookRequest(bookData);
+        console.log(bookId);
+
+        await postBookImageRequest(formData, bookId);
     };
 
     return (
         <>
             <form onSubmit={handleSubmit}>
-                <input type="text" name="news=label" placeholder="Заголовок новости" onChange={handleChange}/>
-                <input type="text" name="news-text" placeholder="Текст новости" onChange={handleChange}/>
-                <input type="file" name="news-photo" placeholder="Фото новости" onChange={handleChangeFile}/>
-                <button type="submit">Добавить книгу</button>
+                <textarea name="name" placeholder="Название книги" rows={2} cols={40} onChange={handleChange}/>
+                <textarea name="description" placeholder="Описание книги" rows={4} cols={40} onChange={handleChange}/>
+                <textarea name="author" placeholder="Автор книги" rows={2} cols={40} onChange={handleChange}/>
+                <input type="date" name="publishDate" placeholder="Дата издания" onChange={handleChange}/>
+                <input type="file" name="photo" placeholder="Фото книги" onChange={handleChangeFile}/>
+                <button type="submit">Опубликовать книгу</button>
             </form>
         </>
     )

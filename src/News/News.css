@@ -51,6 +51,11 @@
     color: #0D141C;
 }
 
+.all-news-container {
+    width: 90%;
+    margin: 0 auto;
+}
+
 
 @media screen and (max-width: 1024px) {
     .news-preface-container p {

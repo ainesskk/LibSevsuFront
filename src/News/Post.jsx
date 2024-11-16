@@ -9,7 +9,7 @@ export default function Post({ item }) {
 
     const changeNavigation = () => {
         console.log(item.id);
-        navigate("/newsdetail", { state: { key: `${item.id}` } });
+        navigate("/newsdetail", { state: { id: item.id } });
     }
 
     return (
@@ -21,12 +21,12 @@ export default function Post({ item }) {
                 <div className="post-text">
                     <div className="post-description">
                         <p>{item.text}</p>
-                        <button className="more-button" onClick={changeNavigation}>Подробнее</button>
                     </div>
                     <div className="post-img">
-                        <img src={`${baseUrl}/Image/${item.imageId}`} alt={item.id} />
+                        <img src={`${baseUrl}/Image/${item.imageId}`} alt={item.id}/>
                     </div>
                 </div>
+                <button className="more-button" onClick={changeNavigation}>Подробнее</button>
             </div>
         </>
     );
