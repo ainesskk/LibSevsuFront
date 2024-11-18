@@ -8,8 +8,9 @@ import axios from "axios";
 export default function NewsDetail() {
     const location = useLocation();
     const { id } = location.state;
+    console.log(id);
     const navigate = useNavigate();
-    const [newsItem, setNewsItem] = useState(null);
+    const [newsItem, setNewsItem] = useState();
 
     useEffect(() => {
         async function loadNewsItem() {
@@ -27,7 +28,7 @@ export default function NewsDetail() {
         }
 
         loadNewsItem();
-    }, [id]);
+    }, []);
 
     const goBack = () => {
         navigate(-1);

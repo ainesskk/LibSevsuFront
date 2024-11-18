@@ -24,18 +24,15 @@
     background-color: #F7FAFC;
     font-family: Inter, sans-serif;
     font-size: 1.5vw;
-    padding: 1.5vw 0 1.5vw 0;
+    width: 100%; /* Устанавливает ширину строки поиска */
+    box-sizing: border-box;
+    padding: 1.5vw 0 1.5vw 3vw;
     border-radius: 15px;
     border: 1px solid #1A80E5;
     box-shadow: 0 4px 4px 0 #3881F540;
-    width: 100%;
 }
 .searchbar-input:focus{
     border: 1px solid #1A80E5;
-}
-
-.searchbar-input::placeholder{
-    padding-left: 20px;
 }
 
 @media screen and (max-width: 660px){

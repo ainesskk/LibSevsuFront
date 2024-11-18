@@ -1,10 +1,14 @@
-import './BookSearch.css'
-import {useState} from "react";
-import {getBookSearchRequest} from "../api/booksRequests.jsx";
+import './BookSearch.css';
+import { useEffect, useRef, useState } from "react";
+import axios from "axios";
+import { baseUrl } from "../data.js";
+import Book from "./Book.jsx";
+import "./Book.css";
 
 export default function Search() {
-
-    const [book, setBook] = useState({ take: 5, skip: 0, searchString: "", startDate: "2000-01-01", endDate: "2024-12-31"});
+    const [book, setBook] = useState({ take: 100, skip: 0, searchString: "", startDate: "1700-01-01", endDate: "2024-12-31" });
+    const [booksList, setBooksList] = useState([]);
+    const isFetching = useRef(false);
 
     const handleChange = (event) => {
         setBook({ ...book, [event.target.name]: event.target.value });
@@ -14,7 +18,7 @@ export default function Search() {
         e.preventDefault();
 
         const bookData = {
-            take: 5,
+            take: 100,
             skip: 0,
             searchString: book.searchString,
             startDate: book.startDate,
@@ -23,26 +27,68 @@ export default function Search() {
 
         console.log("bookData ", bookData);
 
-        const books = await getBookSearchRequest(bookData);
-        console.log(books);
+        try {
+            const response = await axios.post(`${baseUrl}/Book/search`, bookData);
+            console.log(response);
+
+            setBooksList(response.data);
+            console.log(booksList);
+        } catch (error) {
+            console.error("Error:", error);
+        }
     };
 
-    return(
+    useEffect(() => {
+        async function fetchBooks() {
+            if (isFetching.current) return;
+            isFetching.current = true;
+
+            const bookData = {
+                take: 100,
+                skip: 0,
+                searchString: "",
+                startDate: null,
+                endDate: null
+            };
+
+            try {
+                const response = await axios.post(`${baseUrl}/Book/search`, bookData);
+                console.log(response);
+
+                const newBooks = response.data.filter(newItem => !booksList.some(item => item.id === newItem.id));
+                setBooksList(newBooks);
+                console.log(booksList);
+            } catch (error) {
+                console.error("Error:", error);
+            }
+
+            isFetching.current = false;
+        }
+
+        fetchBooks();
+    }, [setBooksList]);
+
+    return (
         <>
             <div className="search-container">
                 <h1>Поиск книг, статей и многого другого</h1>
                 <form className="searchbar" onSubmit={handleSubmit}>
                     <div className="searchbar-input-container">
-                        <input className="searchbar-input" name="searchString" type="text" placeholder="Поиск" onChange={handleChange}/>
+                        <input className="searchbar-input" name="searchString" type="text" placeholder="Поиск" onChange={handleChange} />
                     </div>
                     <div className="search-filter-container">
                         <h2>Уточните свой поиск</h2>
                     </div>
-                    <input type="date" name="startDate" value="2000-01-01" onChange={handleChange}/>
-                    <input type="date" name="endDate" value="2024-12-31" onChange={handleChange}/>
+                    <input type="date" name="startDate" value={book.startDate} onChange={handleChange} />
+                    <input type="date" name="endDate" value={book.endDate} onChange={handleChange} />
                     <button type="submit">Поиск</button>
                 </form>
+                <div className="book-list-container">
+                    {booksList.map(item => (
+                        <Book key={item.id} item={item} />
+                    ))}
+                </div>
             </div>
         </>
-    )
+    );
 }

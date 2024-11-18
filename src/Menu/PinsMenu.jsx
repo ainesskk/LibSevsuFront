@@ -5,7 +5,7 @@ import {baseUrl} from "../data.js";
 import { AuthContext } from "../contexts/AppContext/AuthContext.jsx";
 
 export default function PinsMenu() {
-    const [imgURL, setImgURL] = useState("");
+    const [img, setImg] = useState("");
     const { photoChanged } = useContext(AuthContext);
     const defaultImg = "../src/assets/unknownUser.png";
 
@@ -17,10 +17,10 @@ export default function PinsMenu() {
 
                 try {
                     const imageURL = `${baseUrl}/Image/${photoChanged}`;
-                    setImgURL(imageURL);
+                    setImg(imageURL);
                 } catch (error) {
                     console.error("Ошибка при загрузке изображения:", error);
-                    setImgURL(defaultImg);
+                    setImg(defaultImg);
                 }
             }
 
@@ -35,7 +35,7 @@ export default function PinsMenu() {
                 <li className="pin-container"><Link to={authentication}><img
                     src="/src/assets/account.svg" alt="acсount"></img></Link></li>
                 <li className="user-photo-pin-container">
-                    <div className="user-photo-pin"><img src={imgURL || defaultImg} alt="userPhoto"></img></div>
+                    <div className="user-photo-pin"><img src={img} alt="userPhoto"></img></div>
                 </li>
             </div>
         </>
