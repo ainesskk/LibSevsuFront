@@ -7,6 +7,8 @@ import Search from "./BookSearch/Search.jsx";
 import UserPage from "./PersonalPage/UserPage.jsx";
 import NewsDetail from "./News/NewsDetail.jsx";
 import NewsList from "./News/NewsList.jsx";
+import AddNews from "./Admin/AddNews.jsx";
+import AddBooks from "./Admin/AddBooks.jsx";
 import {AuthProvider} from "./contexts/AppContext/AuthContext.jsx";
 // 1912 922
 function App() {
@@ -22,6 +24,8 @@ function App() {
                       <Route path="/userpage" element={<UserPage />} />
                       <Route path="/newsdetail" element={<NewsDetail />} />
                       <Route path="/allnews" element={<NewsList />} />
+                      <Route path="/addnews" element={<AddNews />} />
+                      <Route path="/addbooks" element={<AddBooks />} />
                   </Routes>
           </AuthProvider>
       </>

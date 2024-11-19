@@ -74,18 +74,19 @@ export default function Search() {
                 <h1>Поиск книг, статей и многого другого</h1>
                 <form className="searchbar" onSubmit={handleSubmit}>
                     <div className="searchbar-input-container">
-                        <input className="searchbar-input" name="searchString" type="text" placeholder="Поиск" onChange={handleChange} />
+                        <input className="searchbar-input" name="searchString" type="text" placeholder="Поиск"
+                               onChange={handleChange}/>
                     </div>
                     <div className="search-filter-container">
                         <h2>Уточните свой поиск</h2>
                     </div>
-                    <input type="date" name="startDate" value={book.startDate} onChange={handleChange} />
-                    <input type="date" name="endDate" value={book.endDate} onChange={handleChange} />
+                    <input type="date" name="startDate" value={book.startDate} onChange={handleChange}/>
+                    <input type="date" name="endDate" value={book.endDate} onChange={handleChange}/>
                     <button type="submit">Поиск</button>
                 </form>
                 <div className="book-list-container">
                     {booksList.map(item => (
-                        <Book key={item.id} item={item} />
+                        <Book key={item.id} item={item}/>
                     ))}
                 </div>
             </div>

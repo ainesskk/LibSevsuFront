@@ -27,6 +27,16 @@ export function getRole(){
     }
 }
 
+//функция получения имени из localstorage
+export function getName(){
+    const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+    if (userInfo && userInfo.name) {
+        return userInfo.name;
+    } else {
+        return null;
+    }
+}
+
 //функция получения id изображения пользователя из localstorage
 export async function getImageId() {
     const userInfo = JSON.parse(localStorage.getItem('userInfo'));

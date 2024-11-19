@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 import { postUserImageRequest } from "../api/authenticationRequests.jsx";
-import {getImageId, getRole, getToken, setData, useDeleteUserInfo} from "../localStorage/localStorageFunctions.jsx";
+import {getImageId, getRole, getToken, setData, useDeleteUserInfo, getName} from "../localStorage/localStorageFunctions.jsx";
 import { baseUrl } from "../data.js";
 import './UserPage.css';
 import { useNavigate } from "react-router-dom";
@@ -85,8 +85,14 @@ export default function UserPage() {
         if(getRole() === "Admin") {
             return (
                 <>
-                    <AddNews />
-                    <AddBooks />
+                    <button className="navigate-add-book" onClick={() => {
+                        navigate('/addbooks')
+                    }}>Добавить книгу
+                    </button>
+                    <button className="navigate-add-news" onClick={() => {
+                        navigate('/addnews')
+                    }}>Добавить новость
+                    </button>
                 </>
             )
         }
@@ -94,15 +100,19 @@ export default function UserPage() {
 
     return (
         <>
-            <form onSubmit={handleSubmit}>
-                <img className="user-photo" src={imgURL || defaultImg} alt=""/>
-                <input type="file" name="photo" placeholder="Фото пользователя" onChange={handleChangeFile}/>
-                <button className="login" type="submit">Загрузить аватарку</button>
-            </form>
-            {
-                returnAdminTools()
-            }
-            <button className="logout" onClick={handleLogout}>Выйти</button>
+            <div className="user-page-container">
+                <h2 className="user-page-header">Личный кабинет</h2>
+                <form onSubmit={handleSubmit}>
+                    <p>{getName()}</p>
+                    <img className="user-photo" src={imgURL || defaultImg} alt=""/>
+                    <input type="file" name="photo" placeholder="Фото пользователя" onChange={handleChangeFile}/>
+                    <button className="login" type="submit">Загрузить аватарку</button>
+                </form>
+                {
+                    returnAdminTools()
+                }
+                <button className="logout" onClick={handleLogout}>Выйти</button>
+            </div>
         </>
     );
 }

@@ -2,9 +2,11 @@ import {useContext, useState} from "react";
 import {registrationRequest} from "../api/authenticationRequests.jsx";
 import { useNavigate } from "react-router-dom";
 import {AuthContext} from "../contexts/AppContext/AuthContext.jsx";
+import "./Registration.css"
+import PropTypes from "prop-types";
 
 
-export default function Registration() {
+export default function Registration({ handleGetAuthentStatus }) {
     const navigate = useNavigate();
     const {login} = useContext(AuthContext);
 
@@ -32,44 +34,30 @@ export default function Registration() {
 
     };
 
+    const handleClick = () => {
+        handleGetAuthentStatus("Login")
+    }
+
     return (
         <>
-            <form onSubmit={handleSubmit}>
-                <input name="login" type="login" placeholder="Логин" onChange={handleChange}/>
-                <input name="password" type="password" placeholder="Пароль" autoComplete="on" onChange={handleChange}/>
-                <input name="name" type="name" placeholder="Имя" onChange={handleChange}/>
-                <button className="login" type="submit">Зарегистрироваться</button>
-            </form>
+            <div className="registration-form-container">
+                <form className="registration-form" onSubmit={handleSubmit}>
+                    <div className="registration-container">
+                        <input name="name" type="name" placeholder="Введите имя..." onChange={handleChange}/>
+                        <input name="login" type="login" placeholder="Введите логин..." onChange={handleChange}/>
+                        <input name="password" type="password" placeholder="Введите пароль..." onChange={handleChange}/>
+                    </div>
+                    <div className="registration-form-buttons">
+                        <button id="registration-login-button" type="reset" onClick={handleClick}>Вход</button>
+                        <button id="registration-button" type="submit">Зарегистрироваться</button>
+                    </div>
+                </form>
+            </div>
+
         </>
     )
 }
 
-
-
-// const handleSubmit = async (e) => {
-//     e.preventDefault();
-//
-//
-//     axios.post(`${baseUrl}/News/c1958607-5838-498b-eb6d-8a4d710aba4a/Image`,formData )
-//         .then((response) => {
-//             console.log(response);
-//         })
-//         .catch((error) => {
-//             console.error("Error:", error);
-//         });
-// };
-
-
-// const books = async () => {
-//     let response = await axios.get(baseUrl + "/Book/354e91af-31e8-4baa-8a32-3632b193b187");
-//
-//     console.log(response);
-// }
-//
-// useEffect( () => {
-//     const fetchData = async () => {
-//         await books()
-//     }
-//
-//     fetchData();
-// }, []);
+Registration.propsType = {
+    handleGetAuthentStatus: PropTypes.func.isRequired
+};

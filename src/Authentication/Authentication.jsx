@@ -3,10 +3,11 @@ import Login from "./Login.jsx";
 import {useContext, useEffect, useState} from "react";
 import {AuthContext} from "../contexts/AppContext/AuthContext.jsx";
 import {useNavigate} from "react-router-dom";
+import "./Login.css"
 
 export default function AuthenticationTeg() {
     const {isAuthorized} = useContext(AuthContext);
-    const [statusAuthent, setStatusAuthent] = useState("Registration");
+    const [statusAuthent, setStatusAuthent] = useState("Login");
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -15,26 +16,17 @@ export default function AuthenticationTeg() {
         }
     }, [navigate])
 
-    function getAuthenticationTeg() {
-
-        if(statusAuthent === "Registration"){
-            return <Registration />
-        }else{
-            return <Login />
-        }
+    const handleGetAuthentStatus = (status) => {
+        setStatusAuthent(status);
     }
+
     return (
         <>
             {
-                getAuthenticationTeg()
+                statusAuthent === "Login" ?
+                    <Login handleGetAuthentStatus={handleGetAuthentStatus}/> :
+                    <Registration handleGetAuthentStatus={handleGetAuthentStatus} />
             }
-            <button className="button-register" onClick={() => {
-                setStatusAuthent("Registration");
-            }}>Регистрация</button>
-
-            <button className="button-login" onClick={() => {
-                setStatusAuthent("Login");
-            }}>Вход</button>
         </>
     )
 }
