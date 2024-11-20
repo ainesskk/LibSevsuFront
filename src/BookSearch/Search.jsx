@@ -6,7 +6,7 @@ import Book from "./Book.jsx";
 import "./Book.css";
 
 export default function Search() {
-    const [book, setBook] = useState({ take: 100, skip: 0, searchString: "", startDate: "1700-01-01", endDate: "2024-12-31" });
+    const [book, setBook] = useState({ take: 100, skip: 0, searchString: "", startDate: null, endDate: null });
     const [booksList, setBooksList] = useState([]);
     const isFetching = useRef(false);
 
@@ -84,9 +84,9 @@ export default function Search() {
                     </div>
                     <div className="datapicker-container">
                         <p>Искать с</p>
-                        <input type="date" name="startDate" value={book.startDate} onChange={handleChange}/>
+                        <input type="date" name="startDate" value="" onChange={handleChange}/>
                         <p>по</p>
-                        <input type="date" name="endDate" value={book.endDate} onChange={handleChange}/>
+                        <input type="date" name="endDate" value="" onChange={handleChange}/>
                     </div>
 
                 </form>
