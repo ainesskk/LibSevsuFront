@@ -1,4 +1,3 @@
-
 .search-container{
     margin: 0 auto;
     width: 90%;
@@ -20,11 +19,27 @@
     text-align: left;
 }
 
+.searchbar-input-container{
+    display: flex;
+    justify-content: space-between;
+}
+
+.searchbar-input-container button{
+    width: 15%;
+    padding: 0.7vw 0.7vw;
+    font-size: 1.5vw;
+    color: white;
+    border: none;
+    background-color: #1a80e5;
+    border-radius: 1.5vw;
+    cursor: pointer;
+}
+
 .searchbar-input{
     background-color: #F7FAFC;
     font-family: Inter, sans-serif;
     font-size: 1.5vw;
-    width: 100%; /* Устанавливает ширину строки поиска */
+    width: 83%;
     box-sizing: border-box;
     padding: 1.5vw 0 1.5vw 3vw;
     border-radius: 15px;
@@ -33,6 +48,32 @@
 }
 .searchbar-input:focus{
     border: 1px solid #1A80E5;
+}
+
+.datapicker-container{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 2vw 0;
+}
+
+.datapicker-container p{
+    margin: 0 0 0 2vw ;
+    font-size: 2vw;
+    color: #0D141C;
+    font-weight: 700;
+}
+
+.datapicker-container input{
+    font-size: 1.2vw;
+    padding: 0.8vw 0.8vw 0.8vw 1.8vw;
+    margin: 0 0 0 2vw;
+    width: 20%;
+    background-color: #DBDBDB;
+    color: #5A5A5A;
+    border-radius: 2vw;
+    border: none;
+    font-family: Inter, sans-serif;
 }
 
 @media screen and (max-width: 660px){

@@ -76,13 +76,19 @@ export default function Search() {
                     <div className="searchbar-input-container">
                         <input className="searchbar-input" name="searchString" type="text" placeholder="Поиск"
                                onChange={handleChange}/>
+
+                        <button type="submit">Поиск</button>
                     </div>
                     <div className="search-filter-container">
                         <h2>Уточните свой поиск</h2>
                     </div>
-                    <input type="date" name="startDate" value={book.startDate} onChange={handleChange}/>
-                    <input type="date" name="endDate" value={book.endDate} onChange={handleChange}/>
-                    <button type="submit">Поиск</button>
+                    <div className="datapicker-container">
+                        <p>Искать с</p>
+                        <input type="date" name="startDate" value={book.startDate} onChange={handleChange}/>
+                        <p>по</p>
+                        <input type="date" name="endDate" value={book.endDate} onChange={handleChange}/>
+                    </div>
+
                 </form>
                 <div className="book-list-container">
                     {booksList.map(item => (

@@ -1,12 +1,16 @@
 import {useState} from "react";
 import {postNewsImageRequest, postNewsRequest} from "../api/newsRequests.jsx";
+import "./AddNews.css"
 export default function AddNews() {
 
     const [photo, setPhoto] = useState("");
+    const [newsPhotoName, setNewsPhotoName] = useState("");
     const [news, setNews] = useState({ label: "", text: ""});
 
     const handleChangeFile = (event) => {
-        setPhoto(event.target.files[0]);
+        const file = event.target.files[0];
+        setPhoto(file);
+        setNewsPhotoName(file.name);
     };
 
     const handleChange = (event) => {
@@ -35,12 +39,26 @@ export default function AddNews() {
 
     return (
         <>
-            <form onSubmit={handleSubmit}>
-                <textarea name="label" placeholder="Заголовок новости" rows={2} cols={40} onChange={handleChange}/>
-                <textarea name="text" placeholder="Текст новости" rows={4} cols={40} onChange={handleChange}/>
-                <input type="file" name="photo" placeholder="Фото новости" onChange={handleChangeFile}/>
-                <button type="submit">Опубликовать новость</button>
-            </form>
+            <div className="add-news-container">
+                <h2 className="add-book-header">Добавить новость</h2>
+                <form onSubmit={handleSubmit}>
+                    <div className="add-news-form">
+                        <textarea name="label" placeholder="Заголовок новости" rows={2} cols={40}
+                                  onChange={handleChange}/>
+                        <textarea name="text" placeholder="Текст новости" rows={4} cols={40} onChange={handleChange}/>
+                        <div className="news-photo-upload">
+                            <label className="choose-news-file">
+                                <input type="file" name="photo" placeholder="Фото книги" onChange={handleChangeFile}/>
+                                <div>
+                                    {newsPhotoName === "" ? 'Файл не выбран' : newsPhotoName}
+                                </div>
+                            </label>
+                        </div>
+
+                        <button className="create-news-button" type="submit">Подтвердить</button>
+                    </div>
+                </form>
+            </div>
         </>
     )
 }

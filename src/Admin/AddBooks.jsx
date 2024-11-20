@@ -1,12 +1,16 @@
 import {useState} from "react";
 import {postBookImageRequest, postBookRequest} from "../api/booksRequests.jsx";
+import "./AddBooks.css"
 export default function AddBooks() {
 
     const [photo, setPhoto] = useState("");
+    const [bookPhotoName, setbookPhotoName] = useState("");
     const [book, setBook] = useState({name: "", description: "", author: "", publishDate: "" });
 
     const handleChangeFile = (event) => {
-        setPhoto(event.target.files[0]);
+        const file = event.target.files[0];
+        setPhoto(file);
+        setbookPhotoName(file.name);
     };
 
     const handleChange = (event) => {
@@ -37,14 +41,30 @@ export default function AddBooks() {
 
     return (
         <>
-            <form onSubmit={handleSubmit}>
-                <textarea name="name" placeholder="Название книги" rows={2} cols={40} onChange={handleChange}/>
-                <textarea name="description" placeholder="Описание книги" rows={4} cols={40} onChange={handleChange}/>
-                <textarea name="author" placeholder="Автор книги" rows={2} cols={40} onChange={handleChange}/>
-                <input type="date" name="publishDate" placeholder="Дата издания" onChange={handleChange}/>
-                <input type="file" name="photo" placeholder="Фото книги" onChange={handleChangeFile}/>
-                <button type="submit">Опубликовать книгу</button>
-            </form>
+            <div className="add-book-container">
+                <h2 className="add-book-header">Добавить книгу</h2>
+                <form onSubmit={handleSubmit}>
+                    <div className="add-book-form">
+                        <textarea name="name" placeholder="Название книги" rows={2} cols={40} onChange={handleChange}/>
+                        <textarea name="description" placeholder="Описание книги" rows={4} cols={40}
+                                  onChange={handleChange}/>
+                        <textarea name="author" placeholder="Автор книги" rows={2} cols={40} onChange={handleChange}/>
+                        <input type="date" name="publishDate" placeholder="Дата издания" onChange={handleChange}/>
+                        <div className="book-photo-upload">
+                            <label className="choose-book-file">
+                                <input type="file" name="photo" placeholder="Фото книги" onChange={handleChangeFile}/>
+                                <div>
+                                    {bookPhotoName === "" ? 'Файл не выбран' : bookPhotoName}
+                                </div>
+                            </label>
+
+                        </div>
+
+                        <button className="create-book-button" type="submit">Подтвердить</button>
+                    </div>
+                </form>
+            </div>
+
         </>
     )
 }
